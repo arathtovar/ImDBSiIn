@@ -1,0 +1,53 @@
+
+mysql> CREATE TABLE Licencias (
+    ->     Id_Empleado int(18) ' at line 1
+mysql> Query OK, 0 rows affected, 1 warning (0.03 sec)
+    -> 
+    -> mysql> 
+    -> mysql> INSERT INTO Licencias VALUES
+    ->     -> (1001, 'Tipo A'),
+    ->     ->   (1001, 'Tipo B'),
+    ->     ->     (1001, 'Tipo C'),
+    ->     ->       (2002, 'Tipo A'),
+    ->     ->         (2002, 'Tipo B'),
+    ->     ->           (2002, 'Tipo C'),
+    ->     ->         (3003, 'Tipo A'),
+    ->     ->       (3003, 'Tipo D'),
+    ->     ->     (4004, 'Tipo A'),
+    ->     ->   (4004, 'Tipo B'),
+    ->     ->    (4004, 'Tipo D'),
+    ->     ->     (5005, 'Tipo A'),
+    ->     ->       (5005, 'Tipo B'),
+    ->     ->         (5005, 'Tipo D');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL serv
+er version for the right syntax to use near 'Query OK, 0 rows affected, 1 warning (0.03 sec)
+mysql> 
+mysql> INSERT INTO Lice' at line 1
+mysql> Query OK, 14 rows affected (0.00 sec)
+    -> Records: 14  Duplicates: 0  Warnings: 0
+    -> 
+    -> mysql> 
+    -> mysql> SELECT  l1.Id_Empleado AS Id_Empleado_1, l2.Id_Empleado AS Id_Empleado_2,
+    ->     ->     COUNT(*) AS Coincidencias
+    ->     -> FROM Licencias l1
+    ->     -> JOIN Licencias l2
+    ->     -> ON l1.Licencia = l2.Licencia
+    ->     -> AND 
+    ->     ->     l1.Id_Empleado != l2.Id_Empleado
+    ->     -> GROUP BY 
+    ->     ->     l1.Id_Empleado, l2.Id_Empleado
+    ->     -> HAVING 
+    ->     ->     Coincidencias = 3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Query OK, 14 rows affected (0.00 sec)
+Records: 14  Duplicates: 0  Warnings: 0
+
+m' at line 1
+mysql> +---------------+---------------+---------------+
+    -> | Id_Empleado_1 | Id_Empleado_2 | Coincidencias |
+    -> +---------------+---------------+---------------+
+    -> |          2002 |          1001 |             3 |
+    -> |          1001 |          2002 |             3 |
+    -> |          5005 |          4004 |             3 |
+    -> |          4004 |          5005 |             3 |
+    -> +---------------+---------------+----^Z^C
+mysql> ^Z
