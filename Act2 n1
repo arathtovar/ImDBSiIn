@@ -1,0 +1,56 @@
+
+Server version: 8.0.40 Source distribution
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+mysql> show databass;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL serv
+er version for the right syntax to use near 'databass' at line 1
+mysql> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| arathtovar$CHAMBEADORES |
+| arathtovar$EMPLEO       |
+| arathtovar$Join         |
+| arathtovar$carros       |
+| arathtovar$default      |
+| arathtovar$desarrollo   |
+| information_schema      |
+| performance_schema      |
++-------------------------+
+8 rows in set (0.51 sec)
+mysql> use arathtovar$desarrollo ;
+Database changed
+mysql> CREATE TABLE Desarrollo (
+    ->     Desarrollo varchar(18) NOT NULL,
+    ->     Etapa int(14) NOT NULL,
+    ->     Finalizado varchar(14) NULL,
+    ->     UNIQUE(Finalizado)
+    -> );
+Query OK, 0 rows affected, 1 warning (0.10 sec)
+
+mysql> 
+mysql> INSERT INTO Desarrollo values
+    -> ('RestAPI',1,'01/02/2024'), ('RestAPI',2,'30/05/2024'),
+    -> ('RestAPI',3,'29/06/2024'),
+    -> ('Web',1,'28/10/2024'),('Web',2,'20/11/2024'),
+    -> ('Web',3,NULL), ('App',1,'30/01/2025'),
+    -> ('App',2,NULL);
+Query OK, 8 rows affected (0.03 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> SELECT  Desarrollo
+    -> FROM  Desarrollo
+    -> WHERE Finalizado IS NULL;
++------------+
+| Desarrollo |
++------------+
+| Web        |
+| App        |
++------------+
+2 rows in set (0.00 sec)
+
