@@ -1,0 +1,60 @@
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 46871479
+Server version: 8.0.40 Source distribution
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+mysql> show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| arathtovar$CHAMBEADORES |
+| arathtovar$DirectorioTE |
+| arathtovar$EMPLEO       |
+| arathtovar$Join         |
+| arathtovar$carros       |
+| arathtovar$default      |
+| arathtovar$desarrollo   |
+| information_schema      |
+| performance_schema      |
++-------------------------+
+9 rows in set (0.19 sec)
+mysql> 
+mysql> use arathtovar$DirectorioTE;
+Database changed
+mysql>  CREATE TABLE Directorio (
+    -> CustomerID INT(18) NOT NULL,
+    -> TypePhone varchar(15) NOT NULL,
+mysql> INSERT INTO 
+    -> Number varchar(15) NOT NULL,
+    -> PRIMARY KEY(Number)
+    -> );
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> 
+mysql> INSERT INTO 
+    -> Directorio 
+    -> values
+    ->  (1001,'Celular','333-897-5421'), (1001,'Trabajo','333-897-6542'),
+    ->  (1001,'Casa','333-698-9874'), (2002,'Celular','333-963-6544'),
+    ->  (2002,'Trabajo','333-812-9856'), (3003,'Celular','333-987-6541');
+Query OK, 6 rows affected (0.00 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> SELECT  CustomerID, MAX(CASE WHEN TypePhone = 'Celular' THEN Number END) AS Celular,
+    -> MAX(CASE WHEN TypePhone = 'Trabajo' THEN Number END) AS Trabajo,
+    -> MAX(CASE WHEN TypePhone = 'Casa' THEN Number END) AS Casa
+    -> FROM  Directorio GROUP BY  CustomerID;
++------------+--------------+--------------+--------------+
+| CustomerID | Celular      | Trabajo      | Casa         |
++------------+--------------+--------------+--------------+
+|       1001 | 333-897-5421 | 333-897-6542 | 333-698-9874 |
+|       2002 | 333-963-6544 | 333-812-9856 | NULL         |
+|       3003 | 333-987-6541 | NULL         | NULL         |
++------------+--------------+--------------+--------------+
+3 rows in set (0.01 sec)
+
